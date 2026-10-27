@@ -1,0 +1,168 @@
+package com.harpreet.omniai.ui
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+
+/**
+ * Lightweight UI translation. English text is the key; if a string has no
+ * translation it simply stays in English. Changing [lang] recomposes the UI.
+ */
+object I18n {
+    var lang by mutableStateOf("en")
+
+    val options = linkedMapOf("English" to "en", "हिन्दी" to "hi", "ਪੰਜਾਬੀ" to "pa")
+
+    fun translate(s: String): String = when (lang) {
+        "hi" -> HI[s]
+        "pa" -> PA[s]
+        else -> null
+    } ?: s
+
+    private val HI = mapOf(
+        "Chat" to "चैट", "Tools" to "टूल्स", "History" to "इतिहास", "Favorites" to "पसंदीदा",
+        "Settings" to "सेटिंग्स", "New chat" to "नई चैट", "Message" to "संदेश",
+        "Thinking…" to "सोच रहा हूँ…", "Search all chats" to "सभी चैट खोजें",
+        "No chats yet." to "अभी कोई चैट नहीं।",
+        "No favorites yet.\nTap the heart on any chat." to "अभी कोई पसंदीदा नहीं।\nकिसी भी चैट पर दिल दबाएँ।",
+        "Hi" to "नमस्ते", "Ask OmniAI anything" to "OmniAI से कुछ भी पूछें",
+        "🤖 Ask OmniAI anything" to "🤖 OmniAI से कुछ भी पूछें",
+        "Account" to "खाता",
+        "Guest mode: chats are saved on this device only." to "अतिथि मोड: चैट केवल इस डिवाइस पर सहेजी जाती हैं।",
+        "Sign in / Create account" to "साइन इन / खाता बनाएँ", "Log out" to "लॉग आउट",
+        "Delete account" to "खाता हटाएँ", "Dark mode" to "डार्क मोड",
+        "Voice language (speech input & read-aloud)" to "आवाज़ की भाषा (बोलकर लिखना और पढ़कर सुनाना)",
+        "App lock" to "ऐप लॉक",
+        "PIN lock is on. The app locks after 30 seconds in the background." to "PIN लॉक चालू है। ऐप बैकग्राउंड में 30 सेकंड बाद लॉक हो जाता है।",
+        "Remove PIN" to "PIN हटाएँ", "Set PIN" to "PIN सेट करें", "New PIN (4–6 digits)" to "नया PIN (4–6 अंक)",
+        "AI provider (OpenAI-compatible)" to "AI प्रदाता (OpenAI-संगत)",
+        "Chat model" to "चैट मॉडल", "API key" to "API कुंजी", "Image model" to "इमेज मॉडल",
+        "Image size" to "इमेज का आकार", "Save" to "सहेजें", "Saved ✓" to "सहेजा गया ✓",
+        "Usage on this device" to "इस डिवाइस पर उपयोग", "Delete all chats" to "सभी चैट हटाएँ",
+        "App language" to "ऐप की भाषा",
+        "Fingerprint / face unlock" to "फ़िंगरप्रिंट / चेहरे से अनलॉक",
+        "Export my data" to "मेरा डेटा एक्सपोर्ट करें", "Save as JSON file" to "JSON फ़ाइल में सहेजें",
+        "Share as Markdown" to "Markdown के रूप में साझा करें",
+        "Export includes chats and personas. Your API key is never exported." to "एक्सपोर्ट में चैट और पर्सोना शामिल हैं। आपकी API कुंजी कभी एक्सपोर्ट नहीं होती।",
+        "Exported ✓" to "एक्सपोर्ट हो गया ✓",
+        "Saved models" to "सहेजे गए मॉडल", "Add model" to "मॉडल जोड़ें", "Remove selected" to "चुना हुआ हटाएँ",
+        "Model name" to "मॉडल का नाम", "Model" to "मॉडल",
+        "🔒 OmniAI-OS is locked" to "🔒 OmniAI-OS लॉक है", "Unlock" to "अनलॉक",
+        "👆 Use fingerprint / face" to "👆 फ़िंगरप्रिंट / चेहरा उपयोग करें",
+        "Unlock OmniAI-OS" to "OmniAI-OS अनलॉक करें", "Use PIN" to "PIN का उपयोग करें",
+        "✍️ AI Writer" to "✍️ AI लेखक",
+        "Blog posts, emails, essays, stories and more" to "ब्लॉग पोस्ट, ईमेल, निबंध, कहानियाँ और बहुत कुछ",
+        "📄 PDF Chat" to "📄 PDF चैट",
+        "Pick a PDF, then ask questions or get a summary" to "PDF चुनें, फिर सवाल पूछें या सारांश पाएँ",
+        "🎨 Image Generator" to "🎨 इमेज जनरेटर",
+        "Describe a picture and generate it" to "तस्वीर का वर्णन करें और उसे बनाएँ",
+        "🌐 Translator" to "🌐 अनुवादक",
+        "Translate text between 10 languages, with voice" to "10 भाषाओं के बीच आवाज़ सहित अनुवाद करें",
+        "🔍 Image Understanding" to "🔍 इमेज समझ",
+        "Describe a photo, read its text (OCR) or ask questions about it" to "फ़ोटो का वर्णन करें, उसका टेक्स्ट पढ़ें (OCR) या उसके बारे में पूछें",
+        "📝 Summarizer" to "📝 सारांशकर्ता",
+        "Condense articles, notes or PDFs in your preferred style" to "लेख, नोट्स या PDF को अपनी पसंदीदा शैली में संक्षिप्त करें",
+        "🎓 Study Tools" to "🎓 पढ़ाई के टूल",
+        "Make flashcards and quizzes from any text" to "किसी भी टेक्स्ट से फ़्लैशकार्ड और क्विज़ बनाएँ",
+        "🧩 Prompt Library" to "🧩 प्रॉम्प्ट लाइब्रेरी",
+        "Ready-made prompts for study, coding, business and more" to "पढ़ाई, कोडिंग, बिज़नेस आदि के लिए तैयार प्रॉम्प्ट",
+        "🧠 Personas" to "🧠 पर्सोना",
+        "Switch or create AI assistants with their own style" to "अलग शैली वाले AI सहायक बदलें या बनाएँ",
+        "💻 Code Assistant" to "💻 कोड सहायक",
+        "Explain, debug, write, review or convert code" to "कोड समझाएँ, डिबग करें, लिखें, रिव्यू करें या बदलें",
+        "Mode" to "मोड", "Language" to "भाषा", "Convert to language" to "इस भाषा में बदलें",
+        "Describe the code you need" to "बताएँ कि आपको कौन-सा कोड चाहिए",
+        "Paste your code or error here" to "अपना कोड या एरर यहाँ चिपकाएँ",
+        "Working…" to "काम हो रहा है…", "Run" to "चलाएँ", "Copy" to "कॉपी", "Share" to "साझा करें",
+        "🔎 Web Search" to "🔎 वेब सर्च", "Search the web and get answers with sources" to "वेब खोजें और स्रोतों के साथ जवाब पाएँ",
+        "🗒️ Memory" to "🗒️ मेमोरी", "Things the AI should always remember about you" to "AI को आपके बारे में जो हमेशा याद रखना चाहिए",
+        "📷 Document Scanner" to "📷 डॉक्यूमेंट स्कैनर", "Scan paper documents, extract text and chat with them" to "कागज़ी दस्तावेज़ स्कैन करें, टेक्स्ट निकालें और उनसे चैट करें",
+        "Ask anything to search the web" to "वेब पर खोजने के लिए कुछ भी पूछें", "Search" to "खोजें", "Searching…" to "खोज रहा हूँ…", "Sources" to "स्रोत",
+        "Use memory in chats" to "चैट में मेमोरी का उपयोग करें", "Add something to remember" to "याद रखने के लिए कुछ जोड़ें", "Add" to "जोड़ें",
+        "Clear all" to "सब हटाएँ", "Nothing saved yet." to "अभी कुछ सहेजा नहीं गया।",
+        "Scan document" to "दस्तावेज़ स्कैन करें", "pages scanned" to "पन्ने स्कैन हुए", "Extract text (OCR)" to "टेक्स्ट निकालें (OCR)",
+        "Chat with this document" to "इस दस्तावेज़ से चैट करें", "Save PDF" to "PDF सहेजें", "Share text" to "टेक्स्ट साझा करें",
+        "Reading…" to "पढ़ रहा हूँ…", "Text found" to "मिला हुआ टेक्स्ट",
+        "Web search" to "वेब सर्च", "Search provider" to "सर्च प्रदाता", "Search API key" to "सर्च API कुंजी",
+        "Offline mode" to "ऑफ़लाइन मोड",
+        "Offline mode uses an on-device model for chat, and offline translation." to "ऑफ़लाइन मोड चैट के लिए डिवाइस पर मौजूद मॉडल और ऑफ़लाइन अनुवाद का उपयोग करता है।",
+        "Choose model file" to "मॉडल फ़ाइल चुनें", "Model ready ✓" to "मॉडल तैयार ✓", "No model selected" to "कोई मॉडल नहीं चुना",
+        "📴 Offline mode" to "📴 ऑफ़लाइन मोड",
+        "Copied" to "कॉपी हो गया"
+    )
+
+    private val PA = mapOf(
+        "Chat" to "ਚੈਟ", "Tools" to "ਟੂਲਜ਼", "History" to "ਇਤਿਹਾਸ", "Favorites" to "ਪਸੰਦੀਦਾ",
+        "Settings" to "ਸੈਟਿੰਗਜ਼", "New chat" to "ਨਵੀਂ ਚੈਟ", "Message" to "ਸੁਨੇਹਾ",
+        "Thinking…" to "ਸੋਚ ਰਿਹਾ ਹਾਂ…", "Search all chats" to "ਸਾਰੀਆਂ ਚੈਟਾਂ ਖੋਜੋ",
+        "No chats yet." to "ਹਾਲੇ ਕੋਈ ਚੈਟ ਨਹੀਂ।",
+        "No favorites yet.\nTap the heart on any chat." to "ਹਾਲੇ ਕੋਈ ਪਸੰਦੀਦਾ ਨਹੀਂ।\nਕਿਸੇ ਵੀ ਚੈਟ ਉੱਤੇ ਦਿਲ ਦਬਾਓ।",
+        "Hi" to "ਸਤ ਸ੍ਰੀ ਅਕਾਲ", "Ask OmniAI anything" to "OmniAI ਤੋਂ ਕੁਝ ਵੀ ਪੁੱਛੋ",
+        "🤖 Ask OmniAI anything" to "🤖 OmniAI ਤੋਂ ਕੁਝ ਵੀ ਪੁੱਛੋ",
+        "Account" to "ਖਾਤਾ",
+        "Guest mode: chats are saved on this device only." to "ਮਹਿਮਾਨ ਮੋਡ: ਚੈਟਾਂ ਸਿਰਫ਼ ਇਸ ਡਿਵਾਈਸ ਉੱਤੇ ਸੰਭਾਲੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।",
+        "Sign in / Create account" to "ਸਾਈਨ ਇਨ / ਖਾਤਾ ਬਣਾਓ", "Log out" to "ਲੌਗ ਆਊਟ",
+        "Delete account" to "ਖਾਤਾ ਹਟਾਓ", "Dark mode" to "ਡਾਰਕ ਮੋਡ",
+        "Voice language (speech input & read-aloud)" to "ਆਵਾਜ਼ ਦੀ ਭਾਸ਼ਾ (ਬੋਲ ਕੇ ਲਿਖਣਾ ਅਤੇ ਪੜ੍ਹ ਕੇ ਸੁਣਾਉਣਾ)",
+        "App lock" to "ਐਪ ਲਾਕ",
+        "PIN lock is on. The app locks after 30 seconds in the background." to "PIN ਲਾਕ ਚਾਲੂ ਹੈ। ਐਪ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ 30 ਸਕਿੰਟ ਬਾਅਦ ਲਾਕ ਹੋ ਜਾਂਦੀ ਹੈ।",
+        "Remove PIN" to "PIN ਹਟਾਓ", "Set PIN" to "PIN ਸੈੱਟ ਕਰੋ", "New PIN (4–6 digits)" to "ਨਵਾਂ PIN (4–6 ਅੰਕ)",
+        "AI provider (OpenAI-compatible)" to "AI ਪ੍ਰਦਾਤਾ (OpenAI-ਅਨੁਕੂਲ)",
+        "Chat model" to "ਚੈਟ ਮਾਡਲ", "API key" to "API ਕੁੰਜੀ", "Image model" to "ਚਿੱਤਰ ਮਾਡਲ",
+        "Image size" to "ਚਿੱਤਰ ਦਾ ਆਕਾਰ", "Save" to "ਸੰਭਾਲੋ", "Saved ✓" to "ਸੰਭਾਲਿਆ ✓",
+        "Usage on this device" to "ਇਸ ਡਿਵਾਈਸ ਉੱਤੇ ਵਰਤੋਂ", "Delete all chats" to "ਸਾਰੀਆਂ ਚੈਟਾਂ ਹਟਾਓ",
+        "App language" to "ਐਪ ਦੀ ਭਾਸ਼ਾ",
+        "Fingerprint / face unlock" to "ਫਿੰਗਰਪ੍ਰਿੰਟ / ਚਿਹਰੇ ਨਾਲ ਅਨਲੌਕ",
+        "Export my data" to "ਮੇਰਾ ਡਾਟਾ ਐਕਸਪੋਰਟ ਕਰੋ", "Save as JSON file" to "JSON ਫ਼ਾਈਲ ਵਿੱਚ ਸੰਭਾਲੋ",
+        "Share as Markdown" to "Markdown ਵਜੋਂ ਸਾਂਝਾ ਕਰੋ",
+        "Export includes chats and personas. Your API key is never exported." to "ਐਕਸਪੋਰਟ ਵਿੱਚ ਚੈਟਾਂ ਅਤੇ ਪਰਸੋਨਾ ਸ਼ਾਮਲ ਹਨ। ਤੁਹਾਡੀ API ਕੁੰਜੀ ਕਦੇ ਐਕਸਪੋਰਟ ਨਹੀਂ ਹੁੰਦੀ।",
+        "Exported ✓" to "ਐਕਸਪੋਰਟ ਹੋ ਗਿਆ ✓",
+        "Saved models" to "ਸੰਭਾਲੇ ਮਾਡਲ", "Add model" to "ਮਾਡਲ ਜੋੜੋ", "Remove selected" to "ਚੁਣਿਆ ਹਟਾਓ",
+        "Model name" to "ਮਾਡਲ ਦਾ ਨਾਮ", "Model" to "ਮਾਡਲ",
+        "🔒 OmniAI-OS is locked" to "🔒 OmniAI-OS ਲਾਕ ਹੈ", "Unlock" to "ਅਨਲੌਕ",
+        "👆 Use fingerprint / face" to "👆 ਫਿੰਗਰਪ੍ਰਿੰਟ / ਚਿਹਰਾ ਵਰਤੋ",
+        "Unlock OmniAI-OS" to "OmniAI-OS ਅਨਲੌਕ ਕਰੋ", "Use PIN" to "PIN ਵਰਤੋ",
+        "✍️ AI Writer" to "✍️ AI ਲੇਖਕ",
+        "Blog posts, emails, essays, stories and more" to "ਬਲੌਗ ਪੋਸਟ, ਈਮੇਲ, ਲੇਖ, ਕਹਾਣੀਆਂ ਅਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ",
+        "📄 PDF Chat" to "📄 PDF ਚੈਟ",
+        "Pick a PDF, then ask questions or get a summary" to "PDF ਚੁਣੋ, ਫਿਰ ਸਵਾਲ ਪੁੱਛੋ ਜਾਂ ਸਾਰ ਲਓ",
+        "🎨 Image Generator" to "🎨 ਚਿੱਤਰ ਜਨਰੇਟਰ",
+        "Describe a picture and generate it" to "ਤਸਵੀਰ ਦਾ ਵੇਰਵਾ ਦਿਓ ਅਤੇ ਉਸਨੂੰ ਬਣਾਓ",
+        "🌐 Translator" to "🌐 ਅਨੁਵਾਦਕ",
+        "Translate text between 10 languages, with voice" to "10 ਭਾਸ਼ਾਵਾਂ ਵਿਚਕਾਰ ਆਵਾਜ਼ ਸਮੇਤ ਅਨੁਵਾਦ ਕਰੋ",
+        "🔍 Image Understanding" to "🔍 ਚਿੱਤਰ ਸਮਝ",
+        "Describe a photo, read its text (OCR) or ask questions about it" to "ਫੋਟੋ ਦਾ ਵੇਰਵਾ ਦਿਓ, ਉਸ ਦਾ ਟੈਕਸਟ ਪੜ੍ਹੋ (OCR) ਜਾਂ ਉਸ ਬਾਰੇ ਪੁੱਛੋ",
+        "📝 Summarizer" to "📝 ਸਾਰ ਬਣਾਉਣ ਵਾਲਾ",
+        "Condense articles, notes or PDFs in your preferred style" to "ਲੇਖ, ਨੋਟਸ ਜਾਂ PDF ਨੂੰ ਆਪਣੀ ਪਸੰਦ ਦੀ ਸ਼ੈਲੀ ਵਿੱਚ ਸੰਖੇਪ ਕਰੋ",
+        "🎓 Study Tools" to "🎓 ਪੜ੍ਹਾਈ ਦੇ ਟੂਲ",
+        "Make flashcards and quizzes from any text" to "ਕਿਸੇ ਵੀ ਟੈਕਸਟ ਤੋਂ ਫਲੈਸ਼ਕਾਰਡ ਅਤੇ ਕੁਇਜ਼ ਬਣਾਓ",
+        "🧩 Prompt Library" to "🧩 ਪ੍ਰੌਂਪਟ ਲਾਇਬ੍ਰੇਰੀ",
+        "Ready-made prompts for study, coding, business and more" to "ਪੜ੍ਹਾਈ, ਕੋਡਿੰਗ, ਬਿਜ਼ਨਸ ਆਦਿ ਲਈ ਤਿਆਰ ਪ੍ਰੌਂਪਟ",
+        "🧠 Personas" to "🧠 ਪਰਸੋਨਾ",
+        "Switch or create AI assistants with their own style" to "ਵੱਖਰੀ ਸ਼ੈਲੀ ਵਾਲੇ AI ਸਹਾਇਕ ਬਦਲੋ ਜਾਂ ਬਣਾਓ",
+        "💻 Code Assistant" to "💻 ਕੋਡ ਸਹਾਇਕ",
+        "Explain, debug, write, review or convert code" to "ਕੋਡ ਸਮਝਾਓ, ਡੀਬੱਗ ਕਰੋ, ਲਿਖੋ, ਰਿਵਿਊ ਕਰੋ ਜਾਂ ਬਦਲੋ",
+        "Mode" to "ਮੋਡ", "Language" to "ਭਾਸ਼ਾ", "Convert to language" to "ਇਸ ਭਾਸ਼ਾ ਵਿੱਚ ਬਦਲੋ",
+        "Describe the code you need" to "ਦੱਸੋ ਤੁਹਾਨੂੰ ਕਿਹੜਾ ਕੋਡ ਚਾਹੀਦਾ ਹੈ",
+        "Paste your code or error here" to "ਆਪਣਾ ਕੋਡ ਜਾਂ ਐਰਰ ਇੱਥੇ ਚਿਪਕਾਓ",
+        "Working…" to "ਕੰਮ ਹੋ ਰਿਹਾ ਹੈ…", "Run" to "ਚਲਾਓ", "Copy" to "ਕਾਪੀ", "Share" to "ਸਾਂਝਾ ਕਰੋ",
+        "🔎 Web Search" to "🔎 ਵੈੱਬ ਸਰਚ", "Search the web and get answers with sources" to "ਵੈੱਬ ਖੋਜੋ ਅਤੇ ਸਰੋਤਾਂ ਸਮੇਤ ਜਵਾਬ ਲਓ",
+        "🗒️ Memory" to "🗒️ ਮੈਮਰੀ", "Things the AI should always remember about you" to "ਉਹ ਗੱਲਾਂ ਜੋ AI ਨੂੰ ਤੁਹਾਡੇ ਬਾਰੇ ਹਮੇਸ਼ਾ ਯਾਦ ਰੱਖਣੀਆਂ ਚਾਹੀਦੀਆਂ ਹਨ",
+        "📷 Document Scanner" to "📷 ਡਾਕੂਮੈਂਟ ਸਕੈਨਰ", "Scan paper documents, extract text and chat with them" to "ਕਾਗਜ਼ੀ ਦਸਤਾਵੇਜ਼ ਸਕੈਨ ਕਰੋ, ਟੈਕਸਟ ਕੱਢੋ ਅਤੇ ਉਨ੍ਹਾਂ ਨਾਲ ਚੈਟ ਕਰੋ",
+        "Ask anything to search the web" to "ਵੈੱਬ ਉੱਤੇ ਖੋਜਣ ਲਈ ਕੁਝ ਵੀ ਪੁੱਛੋ", "Search" to "ਖੋਜੋ", "Searching…" to "ਖੋਜ ਰਿਹਾ ਹਾਂ…", "Sources" to "ਸਰੋਤ",
+        "Use memory in chats" to "ਚੈਟ ਵਿੱਚ ਮੈਮਰੀ ਵਰਤੋ", "Add something to remember" to "ਯਾਦ ਰੱਖਣ ਲਈ ਕੁਝ ਜੋੜੋ", "Add" to "ਜੋੜੋ",
+        "Clear all" to "ਸਭ ਹਟਾਓ", "Nothing saved yet." to "ਹਾਲੇ ਕੁਝ ਸੰਭਾਲਿਆ ਨਹੀਂ ਗਿਆ।",
+        "Scan document" to "ਦਸਤਾਵੇਜ਼ ਸਕੈਨ ਕਰੋ", "pages scanned" to "ਪੰਨੇ ਸਕੈਨ ਹੋਏ", "Extract text (OCR)" to "ਟੈਕਸਟ ਕੱਢੋ (OCR)",
+        "Chat with this document" to "ਇਸ ਦਸਤਾਵੇਜ਼ ਨਾਲ ਚੈਟ ਕਰੋ", "Save PDF" to "PDF ਸੰਭਾਲੋ", "Share text" to "ਟੈਕਸਟ ਸਾਂਝਾ ਕਰੋ",
+        "Reading…" to "ਪੜ੍ਹ ਰਿਹਾ ਹਾਂ…", "Text found" to "ਮਿਲਿਆ ਟੈਕਸਟ",
+        "Web search" to "ਵੈੱਬ ਸਰਚ", "Search provider" to "ਸਰਚ ਪ੍ਰਦਾਤਾ", "Search API key" to "ਸਰਚ API ਕੁੰਜੀ",
+        "Offline mode" to "ਔਫਲਾਈਨ ਮੋਡ",
+        "Offline mode uses an on-device model for chat, and offline translation." to "ਔਫਲਾਈਨ ਮੋਡ ਚੈਟ ਲਈ ਡਿਵਾਈਸ ਉੱਤੇ ਮੌਜੂਦ ਮਾਡਲ ਅਤੇ ਔਫਲਾਈਨ ਅਨੁਵਾਦ ਵਰਤਦਾ ਹੈ।",
+        "Choose model file" to "ਮਾਡਲ ਫ਼ਾਈਲ ਚੁਣੋ", "Model ready ✓" to "ਮਾਡਲ ਤਿਆਰ ✓", "No model selected" to "ਕੋਈ ਮਾਡਲ ਨਹੀਂ ਚੁਣਿਆ",
+        "📴 Offline mode" to "📴 ਔਫਲਾਈਨ ਮੋਡ",
+        "Copied" to "ਕਾਪੀ ਹੋ ਗਿਆ"
+    )
+}
+
+/** Translate a UI string into the selected app language (falls back to English). */
+fun tr(s: String): String = I18n.translate(s)
